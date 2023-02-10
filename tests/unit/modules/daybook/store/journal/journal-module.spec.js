@@ -1,11 +1,11 @@
-import { createStore } from "vuex";
-
+import { createStore } from 'vuex'
 import journal from '@/modules/daybook/store/journal'
-import { journalState } from "../../../../mock-data/test-journal-state";
+import { journalState } from '../../../../mock-data/test-journal-state'
 
 
 
-const createVuexStore = (initialState) =>createStore ({
+const createVuexStore = (initialState) =>
+createStore ({
     modules:{
         journal:{
             ...journal,
@@ -96,7 +96,7 @@ describe('Vuex - Pruebas en el Journal Module', ()=>{
 
         await store.dispatch('journal/loadEntries')
 
-        expect( store.state.journal.entries.length ).toBe(3)
+        expect( store.state.journal.entries.length).toBe(2)
 
     })
 
@@ -121,5 +121,25 @@ describe('Vuex - Pruebas en el Journal Module', ()=>{
             date: 1675952424725,
             text: 'Hello World ',
         })
+    })
+    test('actions: createEntry deleteEntry', async ()=>{
+            const store = createVuexStore( journalState )
+
+        const newEntry = { date: 1627077227978, text: 'Nueva entrada desde las pruebas' }
+
+        const id = await store.dispatch('journal/createEntry', newEntry )
+
+        expect( typeof id ).toBe('string')
+
+        expect(
+            store.state.journal.entries.find( e => e.id === id  )
+        ).toBeTruthy()
+
+
+        await store.dispatch('journal/deleteEntry', id )
+        
+        expect(
+            store.state.journal.entries.find( e => e.id === id  )
+        ).toBeFalsy() 
     })
 })

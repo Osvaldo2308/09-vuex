@@ -4,7 +4,8 @@ import { createStore } from 'vuex'
 
 import journal from '@/modules/daybook/store/journal'
 import EntryList from '@/modules/daybook/components/EntryList'
-import {journalState} from '../../../mock-data/test-journal-state'
+import { journalState } from "../../../mock-data/test-journal-state";
+//import {journalState} from '../../../mock-data/test-journal-state'
 
 
 const createVuexStore = (initialState) =>

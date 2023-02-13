@@ -135,20 +135,23 @@ export default {
             //this.updateEntry( this.entry)
         },
         async onDeleteEntry(){
+            
             const {isConfirmed} = await Swal.fire({
                 title: '¿Estás Seguro?',
                 text: 'Una vez eliminado, no se puede recuperar',
                 showDenyButton: true,
                 confirmButtonText:'Sí, estoy seguro'
             })
+            
             if(isConfirmed){
-                new Swal({
+                Swal.fire({
                     title: 'Espere por favor',
                     allowOutsideClick: false
                 })
                 Swal.showLoading
-            await this.deleteEntry(this.entry.id)
-            this.$router.push({name: 'no-entry'})
+                
+                await this.deleteEntry(this.entry.id)
+                this.$router.push({name: 'no-entry'}) 
 
             Swal.fire('Eliminado', '', 'success')
             }

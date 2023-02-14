@@ -2,6 +2,8 @@
 import axios from 'axios'
 import createVuexStore from '../../../mock-data/mock-data'
 
+
+
 describe ('Vuex: Pruebas en el auth-module',()=>{
     test('Estado incial', ()=>{
         const store = createVuexStore({

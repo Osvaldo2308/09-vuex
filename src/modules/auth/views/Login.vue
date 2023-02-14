@@ -42,14 +42,15 @@ const router = useRouter()
 
 const { loginUser } = useAuth()
 const userForm = ref({
-    email:'osvaldo@gmail.com',
-    password: '123456'
+    email:'',
+    password: ''
 })
 return{
     userForm,
 
     onSubmit:async()=>{
         const {ok, message} = await loginUser(userForm.value)
+
         if (!ok) Swal.fire('Error', message, 'error')
         else router.push( {name: 'no-entry'} )
             }
